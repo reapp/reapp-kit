@@ -4,6 +4,7 @@ require('reapp-object-assign')
 var React = require('react');
 var Components = require('reapp-ui/all');
 var shouldupdate = require('omniscient/shouldupdate');
+var Animated = require('reapp-ui/mixins/Animated');
 
 // component
 class Component extends React.Component {
@@ -14,7 +15,8 @@ class Component extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return shouldupdate.call(this, nextProps, nextState);
+    const isAnimating = this.context.animations['viewList'].step % 1 !== 0;
+    return isAnimating || shouldupdate.call(this, nextProps, nextState);
   }
 }
 
