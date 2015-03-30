@@ -23,6 +23,7 @@ Component.contextTypes = {
 var generator = require('reapp-routes/react-router/generator');
 var render = require('reapp-routes/react-router/render');
 var RoutedViewListMixin = require('reapp-routes/react-router/RoutedViewListMixin');
+var ParentRouteMixin = require('reapp-routes/react-router/ParentRouteMixin');
 
 // desktop touch demo
 if (window.location.hash && window.location.hash.match(/_desktopTouch/))
@@ -49,20 +50,23 @@ var statics = Object.assign(
       ],
 
       // store refresh
-      componentWillMount() {
+      componentWillMount: function() {
         this.forceUpdater = function() {
           this.forceUpdate();
         }.bind(this);
         this.props.store.listen(this.forceUpdater);
       },
-      componentWillUnmount() {
+      componentWillUnmount: function() {
         this.props.store.unlisten(this.forceUpdater);
       },
 
-      render() {
-        return  React.createFactory(
-          Theme(this.props.theme, this.props.children)
-        );
+      render: function() {
+        if (this.props.theme)
+          return React.createFactory(
+            Theme(this.props.theme, this.props.children)
+          );
+        else
+          return this.props.children;
       }
     }),
 
