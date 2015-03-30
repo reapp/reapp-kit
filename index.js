@@ -33,7 +33,7 @@ if (window.location.hash && window.location.hash.match(/_desktopTouch/))
 if (window.cordova && window.cordova.InAppBrowser)
   window.open = window.cordova.InAppBrowser.open;
 
-var Theme = 'reapp-ui/helpers/Theme';
+var Theme = require('reapp-ui/helpers/Theme');
 
 var statics = Object.assign(
   Components,
@@ -45,6 +45,18 @@ var statics = Object.assign(
     Component: Component,
 
     Reapp: React.createClass({
+      childContextTypes: {
+        store: React.PropTypes.func,
+        actions: React.PropTypes.object
+      },
+
+      getChildContext() {
+        return {
+          store: this.props.store,
+          actions: this.props.actions
+        }
+      },
+
       mixins: [
         RoutedViewListMixin
       ],
@@ -54,19 +66,25 @@ var statics = Object.assign(
         this.forceUpdater = function() {
           this.forceUpdate();
         }.bind(this);
-        this.props.store.listen(this.forceUpdater);
+
+        if (this.props.store)
+          this.props.store.listen(this.forceUpdater);
       },
       componentWillUnmount: function() {
-        this.props.store.unlisten(this.forceUpdater);
+        if (this.props.store)
+          this.props.store.unlisten(this.forceUpdater);
       },
 
       render: function() {
-        if (this.props.theme)
-          return React.createFactory(
-            Theme(this.props.theme, this.props.children)
-          );
-        else
-          return this.props.children;
+        const { children, theme, ...props } = this.props;
+
+        const viewList =
+          <Components.ViewList {...props}>
+            {children}
+          </Components.ViewList>
+
+        return theme ?
+          <Theme {...theme}>{viewList}</Theme> : viewList;
       }
     }),
 

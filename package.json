@@ -22,5 +22,8 @@
     "reapp-routes": "^0.10.0",
     "reapp-object-assign": "^1.0.0",
     "react": "^0.13.1"
+  },
+  "peerDependencies": {
+    "react": "0.13.x"
   }
 }
