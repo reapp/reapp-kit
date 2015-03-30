@@ -4,7 +4,6 @@ require('reapp-object-assign')
 var React = require('react');
 var Components = require('reapp-ui/all');
 var shouldupdate = require('omniscient/shouldupdate');
-var clone = require('reapp-ui/lib/niceClone');
 
 // component
 class Component extends React.Component {
@@ -52,63 +51,57 @@ var statics = Object.assign(
     // component
     Component: Component,
 
-    Routed: function(Component) {
+    Reapp: function(opts, Component) {
       return React.createClass({
         mixins: [
           RoutedViewListMixin
         ],
 
+        childContextTypes: {
+          theme: React.PropTypes.object,
+          animations: React.PropTypes.object,
+          store: React.PropTypes.func,
+          actions: React.PropTypes.object
+        },
+
+        getChildContext() {
+          return opts;
+        },
+
+        // store refresh
+        componentWillMount: function() {
+          this.forceUpdater = function() {
+            this.forceUpdate();
+          }.bind(this);
+
+          if (opts.store)
+            opts.store.listen(this.forceUpdater);
+        },
+        componentWillUnmount: function() {
+          if (opts.store)
+            opts.store.unlisten(this.forceUpdater);
+        },
+
         render: function() {
-          return <Component
-            child={this.hasChildRoute() && this.createChildRouteHandler}
-            viewListProps={this.routedViewListProps()}
-          />
+          const { children, theme, ...props } = this.props;
+
+          const viewList =
+            <Components.ViewList {...this.props.viewListProps}>
+              {children}
+            </Components.ViewList>
+
+          const themedChildren = theme ?
+            <Theme {...theme}>{viewList}</Theme> : viewList;
+
+          return (
+            <Component
+              child={this.hasChildRoute() && this.createChildRouteHandler}
+              viewListProps={this.routedViewListProps()}
+            />
+          )
         }
       })
     },
-
-    Reapp: React.createClass({
-      propTypes: {
-        context: React.PropTypes.object.isRequired
-      },
-
-      childContextTypes: {
-        theme: React.PropTypes.object,
-        animations: React.PropTypes.object,
-        store: React.PropTypes.func,
-        actions: React.PropTypes.object
-      },
-
-      getChildContext() {
-        return this.props.context;
-      },
-
-      // store refresh
-      componentWillMount: function() {
-        this.forceUpdater = function() {
-          this.forceUpdate();
-        }.bind(this);
-
-        if (this.props.context.store)
-          this.props.context.store.listen(this.forceUpdater);
-      },
-      componentWillUnmount: function() {
-        if (this.props.context.store)
-          this.props.context.store.unlisten(this.forceUpdater);
-      },
-
-      render: function() {
-        const { children, theme, ...props } = this.props;
-
-        const viewList =
-          <Components.ViewList {...this.props.viewListProps}>
-            {children}
-          </Components.ViewList>
-
-        return theme ?
-          <Theme {...theme}>{viewList}</Theme> : viewList;
-      }
-    }),
 
     // router
     router: function(require, routes) {
