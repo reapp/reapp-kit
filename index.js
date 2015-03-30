@@ -45,34 +45,48 @@ var statics = Object.assign(
     Component: Component,
 
     Reapp: React.createClass({
-      childContextTypes: {
-        store: React.PropTypes.func,
-        actions: React.PropTypes.object
-      },
-
-      getChildContext() {
-        return {
-          store: this.props.store,
-          actions: this.props.actions
-        }
-      },
-
       mixins: [
         RoutedViewListMixin
       ],
 
+      propTypes: {
+        context: React.PropTypes.object.isRequired
+      },
+
+      childContextTypes: {
+        theme: React.PropTypes.object,
+        animations: React.PropTypes.object,
+        store: React.PropTypes.func,
+        actions: React.PropTypes.object
+      },
+
+      // setContext() {
+      //   const contextKeys = Object.keys(this.props.context);
+      //   this.childContextTypes = {};
+
+      //   contextKeys.forEach(key => {
+      //     this.childContextTypes[key] = React.PropTypes.any
+      //   });
+      // },
+
+      getChildContext() {
+        return this.props.context;
+      },
+
       // store refresh
       componentWillMount: function() {
+        // this.setContext();
+
         this.forceUpdater = function() {
           this.forceUpdate();
         }.bind(this);
 
-        if (this.props.store)
-          this.props.store.listen(this.forceUpdater);
+        if (this.props.context.store)
+          this.props.context.store.listen(this.forceUpdater);
       },
       componentWillUnmount: function() {
-        if (this.props.store)
-          this.props.store.unlisten(this.forceUpdater);
+        if (this.props.context.store)
+          this.props.context.store.unlisten(this.forceUpdater);
       },
 
       render: function() {
