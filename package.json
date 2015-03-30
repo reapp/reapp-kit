@@ -1,0 +1,19 @@
+{
+  "name": "reapp-kit",
+  "version": "1.0.0",
+  "description": "Unified platform for apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reapp/reapp-kit"
+  },
+  "author": "Nate Wienert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reapp/reapp-kit/issues"
+  },
+  "homepage": "https://github.com/reapp/reapp-kit"
+}
