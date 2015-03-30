@@ -8,6 +8,12 @@ var clone = require('reapp-ui/lib/niceClone');
 
 // component
 class Component extends React.Component {
+  componentWillMount() {
+    this.actions = this.context.actions;
+    this.store = this.context.store;
+    this.router = this.context.router;
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return shouldupdate.call(this, nextProps, nextState);
   }
@@ -17,7 +23,8 @@ Component.contextTypes = {
   theme: React.PropTypes.object,
   animations: React.PropTypes.object,
   router: React.PropTypes.func,
-  store: React.PropTypes.func
+  store: React.PropTypes.func,
+  actions: React.PropTypes.object
 }
 
 // router
