@@ -4,6 +4,7 @@ require('reapp-object-assign')
 var React = require('react');
 var Components = require('reapp-ui/all');
 var shouldupdate = require('omniscient/shouldupdate');
+var clone = require('reapp-ui/lib/niceClone');
 
 // component
 class Component extends React.Component {
@@ -44,11 +45,22 @@ var statics = Object.assign(
     // component
     Component: Component,
 
-    Reapp: React.createClass({
-      mixins: [
-        RoutedViewListMixin
-      ],
+    Routed: function(Component) {
+      return React.createClass({
+        mixins: [
+          RoutedViewListMixin
+        ],
 
+        render: function() {
+          return <Component
+            child={this.hasChildRoute() && this.createChildRouteHandler}
+            viewListProps={this.routedViewListProps()}
+          />
+        }
+      })
+    },
+
+    Reapp: React.createClass({
       propTypes: {
         context: React.PropTypes.object.isRequired
       },
@@ -60,23 +72,12 @@ var statics = Object.assign(
         actions: React.PropTypes.object
       },
 
-      // setContext() {
-      //   const contextKeys = Object.keys(this.props.context);
-      //   this.childContextTypes = {};
-
-      //   contextKeys.forEach(key => {
-      //     this.childContextTypes[key] = React.PropTypes.any
-      //   });
-      // },
-
       getChildContext() {
         return this.props.context;
       },
 
       // store refresh
       componentWillMount: function() {
-        // this.setContext();
-
         this.forceUpdater = function() {
           this.forceUpdate();
         }.bind(this);
@@ -93,7 +94,7 @@ var statics = Object.assign(
         const { children, theme, ...props } = this.props;
 
         const viewList =
-          <Components.ViewList {...props}>
+          <Components.ViewList {...this.props.viewListProps}>
             {children}
           </Components.ViewList>
 
