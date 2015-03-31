@@ -6,13 +6,20 @@ var theme = require('./theme');
 var actions = require('./actions');
 var ContextTypes = require('./ContextTypes');
 
-module.exports = function(Component) {
+module.exports = function(opts, Component) {
+  if (!Component) {
+    Component = opts;
+    opts = null;
+  }
+
+  opts = opts || {
+    routed: true
+  };
+
   return React.createClass(Object.assign({},
     { childContextTypes: ContextTypes },
     {
-      mixins: [
-        RoutedViewListMixin
-      ],
+      mixins: [].concat(opts.routed ? RoutedViewListMixin : []),
 
       getChildContext: function() {
         return {
@@ -46,10 +53,10 @@ module.exports = function(Component) {
         var themedChildren = theme ?
           React.createFactory(theme, viewList) : viewList;
 
-        return React.createElement(Component, {
+        return React.createElement(Component, opts.routed ? {
           child: this.hasChildRoute() && this.createChildRouteHandler,
           viewListProps: this.routedViewListProps()
-        });
+        } : {});
       }
     }
   ))
