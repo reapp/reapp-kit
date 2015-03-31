@@ -1,6 +1,6 @@
 {
   "name": "reapp-kit",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Unified platform for apps",
   "main": "index.js",
   "scripts": {
