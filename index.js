@@ -1,4 +1,4 @@
-require('reapp-ui');
+var UI = require('reapp-ui');
 require('reapp-object-assign');
 
 // fetch
@@ -52,6 +52,7 @@ module.exports = Object.assign(
 
     // theme
     theme: theme,
+    makeStyles: UI.makeStyles,
 
     // router
     router: function(require, routes) {
