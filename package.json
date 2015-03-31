@@ -17,13 +17,15 @@
   },
   "homepage": "https://github.com/reapp/reapp-kit",
   "dependencies": {
+    "isomorphic-fetch": "^2.0.0",
     "omniscient": "^3.1.0",
-    "reapp-ui": "^0.11.0",
-    "reapp-routes": "^0.10.0",
+    "react": "^0.13.1",
     "reapp-object-assign": "^1.0.0",
-    "react": "^0.13.1"
+    "reapp-routes": "^0.10.0",
+    "reapp-ui": "^0.11.0"
   },
   "peerDependencies": {
-    "react": "0.13.x"
+    "react": "0.13.x",
+    "bluebird": "2.9.x"
   }
 }

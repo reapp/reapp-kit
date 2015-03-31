@@ -1,32 +1,45 @@
 require('reapp-ui');
-require('reapp-object-assign')
+require('reapp-object-assign');
 
+// promises
+var bluebird = require('bluebird');
+Promise = bluebird.Promise;
+
+// fetch
+require('isomorphic-fetch');
+
+// components
 var React = require('react');
 var Components = require('reapp-ui/all');
 var shouldupdate = require('omniscient/shouldupdate');
 var Animated = require('reapp-ui/mixins/Animated');
 
-// component
-class Component extends React.Component {
-  componentWillMount() {
+var Component = React.createClass({
+  contextTypes: {
+    theme: React.PropTypes.object,
+    animations: React.PropTypes.object,
+    router: React.PropTypes.func,
+    store: React.PropTypes.func,
+    actions: React.PropTypes.object
+  },
+
+  componentWillMount: function() {
     this.actions = this.context.actions;
     this.store = this.context.store;
     this.router = this.context.router;
-  }
+  },
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const isAnimating = this.context.animations['viewList'].step % 1 !== 0;
+  shouldComponentUpdate: function(nextProps, nextState) {
+    let isAnimating = false;
+
+    if (this.context.animations)
+      isAnimating = this.context.animations['viewList'].step % 1 !== 0;
+
     return isAnimating || shouldupdate.call(this, nextProps, nextState);
-  }
-}
+  },
 
-Component.contextTypes = {
-  theme: React.PropTypes.object,
-  animations: React.PropTypes.object,
-  router: React.PropTypes.func,
-  store: React.PropTypes.func,
-  actions: React.PropTypes.object
-}
+  render: function() {}
+});
 
 // router
 var generator = require('reapp-routes/react-router/generator');
@@ -85,22 +98,19 @@ var statics = Object.assign(
         },
 
         render: function() {
-          const { children, theme, ...props } = this.props;
+          var children = this.props.children;
+          var theme = this.props.theme;
 
-          const viewList =
-            <Components.ViewList {...this.props.viewListProps}>
-              {children}
-            </Components.ViewList>
+          var viewList =
+            React.createFactory(Components.ViewList, this.props.viewListProps, children);
 
-          const themedChildren = theme ?
-            <Theme {...theme}>{viewList}</Theme> : viewList;
+          var themedChildren = theme ?
+            React.createFactory(theme, viewList) : viewList;
 
-          return (
-            <Component
-              child={this.hasChildRoute() && this.createChildRouteHandler}
-              viewListProps={this.routedViewListProps()}
-            />
-          )
+          return React.createElement(Component, {
+            child: this.hasChildRoute() && this.createChildRouteHandler,
+            viewListProps: this.routedViewListProps()
+          });
         }
       })
     },
