@@ -14,6 +14,7 @@ var theme = require('./lib/theme');
 // react patch
 var React = require('react');
 React.Component = require('./lib/Component');
+React.Page = require('./lib/Page');
 
 // ui
 var Components = require('reapp-ui/all');
