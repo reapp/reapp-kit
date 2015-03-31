@@ -3,49 +3,32 @@ require('reapp-object-assign');
 
 // promises
 var bluebird = require('bluebird');
-Promise = bluebird.Promise;
+var Promise = window.Promise = bluebird.Promise;
 
 // fetch
 require('isomorphic-fetch');
 
-// components
+// data
+var store = require('./lib/store');
+var actions = require('./lib/actions');
+
+// theme
+var theme = require('./lib/theme');
+
+// react patch
 var React = require('react');
+React.Component = require('./lib/Component');
+
+// ui
 var Components = require('reapp-ui/all');
-var shouldupdate = require('omniscient/shouldupdate');
-var Animated = require('reapp-ui/mixins/Animated');
-
-var Component = React.createClass({
-  contextTypes: {
-    theme: React.PropTypes.object,
-    animations: React.PropTypes.object,
-    router: React.PropTypes.func,
-    store: React.PropTypes.func,
-    actions: React.PropTypes.object
-  },
-
-  componentWillMount: function() {
-    this.actions = this.context.actions;
-    this.store = this.context.store;
-    this.router = this.context.router;
-  },
-
-  shouldComponentUpdate: function(nextProps, nextState) {
-    let isAnimating = false;
-
-    if (this.context.animations)
-      isAnimating = this.context.animations['viewList'].step % 1 !== 0;
-
-    return isAnimating || shouldupdate.call(this, nextProps, nextState);
-  },
-
-  render: function() {}
-});
 
 // router
 var generator = require('reapp-routes/react-router/generator');
 var render = require('reapp-routes/react-router/render');
-var RoutedViewListMixin = require('reapp-routes/react-router/RoutedViewListMixin');
-var ParentRouteMixin = require('reapp-routes/react-router/ParentRouteMixin');
+
+// reapp
+var Theme = require('reapp-ui/helpers/Theme');
+var Reapp = require('./lib/Reapp');
 
 // desktop touch demo
 if (window.location.hash && window.location.hash.match(/_desktopTouch/))
@@ -55,65 +38,24 @@ if (window.location.hash && window.location.hash.match(/_desktopTouch/))
 if (window.cordova && window.cordova.InAppBrowser)
   window.open = window.cordova.InAppBrowser.open;
 
-var Theme = require('reapp-ui/helpers/Theme');
-
-var statics = Object.assign(
+module.exports = Object.assign(
   Components,
   {
     // react
     React: React,
 
-    // component
-    Component: Component,
+    // promise
+    Promise: Promise,
 
-    Reapp: function(opts, Component) {
-      return React.createClass({
-        mixins: [
-          RoutedViewListMixin
-        ],
+    // reapp
+    Reapp: Reapp,
 
-        childContextTypes: {
-          theme: React.PropTypes.object,
-          animations: React.PropTypes.object,
-          store: React.PropTypes.func,
-          actions: React.PropTypes.object
-        },
+    // data
+    actions: actions,
+    store: store,
 
-        getChildContext() {
-          return opts;
-        },
-
-        // store refresh
-        componentWillMount: function() {
-          this.forceUpdater = function() {
-            this.forceUpdate();
-          }.bind(this);
-
-          if (opts.store)
-            opts.store.listen(this.forceUpdater);
-        },
-        componentWillUnmount: function() {
-          if (opts.store)
-            opts.store.unlisten(this.forceUpdater);
-        },
-
-        render: function() {
-          var children = this.props.children;
-          var theme = this.props.theme;
-
-          var viewList =
-            React.createFactory(Components.ViewList, this.props.viewListProps, children);
-
-          var themedChildren = theme ?
-            React.createFactory(theme, viewList) : viewList;
-
-          return React.createElement(Component, {
-            child: this.hasChildRoute() && this.createChildRouteHandler,
-            viewListProps: this.routedViewListProps()
-          });
-        }
-      })
-    },
+    // theme
+    theme: theme,
 
     // router
     router: function(require, routes) {
@@ -122,5 +64,3 @@ var statics = Object.assign(
     route: generator.route
   }
 );
-
-module.exports = statics;
