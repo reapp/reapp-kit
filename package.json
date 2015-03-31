@@ -4,7 +4,8 @@
   "description": "Unified platform for apps",
   "main": "build",
   "scripts": {
-    "build": "babel src --out-dir build --experimental"
+    "build": "babel src --out-dir build --experimental",
+    "watch": "babel src --out-dir build --experimental --watch"
   },
   "repository": {
     "type": "git",
