@@ -27,7 +27,6 @@
     "reapp-ui": "^0.11.0"
   },
   "peerDependencies": {
-    "react": "0.13.x",
-    "bluebird": "2.9.x"
+    "react": "0.13.x"
   }
 }

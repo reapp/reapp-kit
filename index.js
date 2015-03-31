@@ -1,10 +1,6 @@
 require('reapp-ui');
 require('reapp-object-assign');
 
-// promises
-var bluebird = require('bluebird');
-var Promise = window.Promise = bluebird.Promise;
-
 // fetch
 require('isomorphic-fetch');
 
@@ -59,7 +55,7 @@ module.exports = Object.assign(
 
     // router
     router: function(require, routes) {
-      return render.async(generator.routes(require, routes), {})
+      return render.async(generator.routes(require, routes))
     },
     route: generator.route
   }
