@@ -1,35 +1,35 @@
-var UI = require('reapp-ui');
-require('reapp-object-assign');
+import UI from 'reapp-ui';
+import 'reapp-object-assign';
+import 'reapp-ui/lib/desktopTouch';
 
 // fetch
-require('isomorphic-fetch');
+import 'isomorphic-fetch';
 
 // data
-var store = require('./lib/store');
-var actions = require('./lib/actions');
+import store from './lib/store';
+import StoreComponent from './lib/StoreComponent';
+import actions from './lib/actions';
 
-// theme
-var theme = require('./lib/theme');
-
-// react patch
-var React = require('react');
-React.Component = require('./lib/Component');
-React.Page = require('./lib/Page');
+// thmee
+import theme from './lib/theme';
 
 // ui
-var Components = require('reapp-ui/all');
+import Components from 'reapp-ui/all';
 
 // router
-var generator = require('reapp-routes/react-router/generator');
-var render = require('reapp-routes/react-router/render');
+import generator from 'reapp-routes/react-router/generator';
+import render from 'reapp-routes/react-router/render';
 
 // reapp
-var Theme = require('reapp-ui/helpers/Theme');
-var Reapp = require('./lib/Reapp');
+import Theme from 'reapp-ui/helpers/Theme';
+import Reapp from './lib/Reapp';
 
-// desktop touch demo
-if (window.location.hash && window.location.hash.match(/_desktopTouch/))
-  require('reapp-ui/lib/desktopTouch');
+// react patch
+import React from 'react';
+import Component from './lib/Component';
+import Page from './lib/Page';
+React.Component = Component;
+React.Page = Page;
 
 // inappbrowser
 if (window.cordova && window.cordova.InAppBrowser)
@@ -50,6 +50,7 @@ module.exports = Object.assign(
     // data
     actions: actions,
     store: store,
+    Store: StoreComponent,
 
     // theme
     theme: theme,

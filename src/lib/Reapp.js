@@ -29,34 +29,30 @@ module.exports = function(opts, Component) {
         };
       },
 
-      // store refresh
-      componentWillMount: function() {
-        this.forceUpdater = function() {
-          this.forceUpdate();
-        }.bind(this);
-
-        if (store())
-          store().listen(this.forceUpdater);
+      componentWillMount() {
+        this.forceUpdater = () => this.forceUpdate();
+        store() && store().listen(this.forceUpdater);
       },
-      componentWillUnmount: function() {
-        if (store())
-          store().unlisten(this.forceUpdater);
+
+      componentWillUnmount() {
+        store() && store().unlisten(this.forceUpdater);
       },
 
       render: function() {
-        var children = this.props.children;
-        var theme = this.props.theme;
+        const children = this.props.children;
+        const Theme = this.props.theme;
+        const viewList =
+          <Components.ViewList {...this.props.viewListProps}>
+            {children}
+          </Components.ViewList>
 
-        var viewList =
-          React.createFactory(Components.ViewList, this.props.viewListProps, children);
-
-        var themedChildren = theme ?
-          React.createFactory(theme, viewList) : viewList;
-
-        return React.createElement(Component, opts.routed ? {
+        const themedChildren = Theme ? <Theme>{viewList}</Theme> : viewList;
+        const props = opts.routed ? {
           child: this.hasChildRoute() && this.createChildRouteHandler,
           viewListProps: this.routedViewListProps()
-        } : {});
+        } : {};
+
+        return <Component {...props} />;
       }
     }
   ))
