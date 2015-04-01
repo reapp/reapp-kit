@@ -1,5 +1,24 @@
 import React from 'react';
 
+/*
+
+  Pass Store properties to children declatatively.
+  fetch : (array|object)
+
+    <Store fetch={['prop', 'otherProp']}>
+      <Child />
+    </Store>
+
+    <Store fetch={{ prop: ['item', 'id'] }} />
+
+ Uses the store in this.context.store
+
+ Given a fetch property
+   1. grabs fetch values from store
+   2. passes values as props to its children
+
+*/
+
 export default class StoreComponent extends React.Component {
   render() {
     const children = React.Children.only(this.props.children);
