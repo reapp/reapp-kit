@@ -10,7 +10,7 @@ import store from './lib/store';
 import StoreComponent from './lib/StoreComponent';
 import actions from './lib/actions';
 
-// thmee
+// theme
 import theme from './lib/theme';
 
 // ui
