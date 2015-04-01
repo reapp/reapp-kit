@@ -3,7 +3,12 @@ import React from 'react';
 export default class StoreComponent extends React.Component {
   render() {
     const children = React.Children.only(this.props.children);
-    if (!children) return;
+
+    if (!children)
+      return;
+
+    if (!this.context.store)
+      return children;
 
     const store = this.context.store();
     const { fetch, ...props } = this.props;

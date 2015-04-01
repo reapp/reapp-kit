@@ -1,15 +1,27 @@
-var React = require('react');
-var ContextTypes = require('./ContextTypes');
-var ShouldUpdate = require('./ShouldUpdate');
-var RoutedViewListMixin = require('reapp-routes/react-router/RoutedViewListMixin');
+import React from 'react';
+import ContextTypes from './ContextTypes';
+import ShouldUpdate from './ShouldUpdate';
+import RoutedViewListMixin from 'reapp-routes/react-router/RoutedViewListMixin';
+import AutoBind from './AutoBind';
 
-module.exports = React.createClass(
+const Base = React.createClass(
   Object.assign({},
-    { contextTypes: ContextTypes },
     ShouldUpdate,
     {
+      contextTypes: ContextTypes,
       mixins: [RoutedViewListMixin],
       render: function() {}
     }
   )
 );
+
+Object.assign(Base.prototype, AutoBind);
+
+class Page extends Base {
+  constructor(props, shouldAutoBind = true) {
+    super(props);
+    if (shouldAutoBind) this.autoBind();
+  }
+}
+
+export default Page;
