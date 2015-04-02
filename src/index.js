@@ -28,6 +28,8 @@ import Reapp from './lib/Reapp';
 import React from 'react';
 import Component from './lib/Component';
 import Page from './lib/Page';
+
+React._Component = React.Component;
 React.Component = Component;
 React.Page = Page;
 
@@ -40,6 +42,9 @@ module.exports = Object.assign(
   {
     // react
     React: React,
+    // reapp component/page export
+    Component: Component,
+    Page: Page,
 
     // promise
     Promise: Promise,

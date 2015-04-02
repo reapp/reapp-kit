@@ -10,4 +10,8 @@ var actions = function(name, cb) {
     actions[name](cb);
 }
 
+actions.unlisten = function(name, fn) {
+  actions[name].unlisten(fn);
+}
+
 module.exports = actions;
