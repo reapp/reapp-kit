@@ -6,6 +6,7 @@ import 'reapp-ui/lib/desktopTouch';
 import 'isomorphic-fetch';
 
 // data
+import Immutable from 'immutable';
 import store from './lib/store';
 import StoreComponent from './lib/StoreComponent';
 import actions from './lib/actions';
@@ -42,12 +43,13 @@ module.exports = Object.assign(
   {
     // react
     React: React,
+
     // reapp component/page export
     Component: Component,
     Page: Page,
 
-    // promise
-    Promise: Promise,
+    // immutable
+    Immutable: Immutable,
 
     // reapp
     Reapp: Reapp,

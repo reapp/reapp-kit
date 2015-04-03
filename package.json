@@ -4,8 +4,8 @@
   "description": "Unified platform for apps",
   "main": "build",
   "scripts": {
-    "build": "babel src --out-dir build --experimental",
-    "watch": "babel src --out-dir build --experimental --watch"
+    "build": "babel src --out-dir build --stage=0",
+    "watch": "babel src --out-dir build --stage=0 --watch"
   },
   "repository": {
     "type": "git",
@@ -25,12 +25,13 @@
     "react": "^0.13.1",
     "reapp-object-assign": "^1.0.0",
     "reapp-routes": "^0.10.0",
-    "reapp-ui": "^0.12.0"
+    "reapp-ui": "^0.12.0",
+    "react-router": "^0.13.2"
   },
   "peerDependencies": {
     "react": "0.13.x"
   },
   "devDependencies": {
-    "babel": "^4.7.16"
+    "babel": "^5.0.7"
   }
 }
