@@ -1,11 +1,17 @@
 var Fynx = require('fynx');
 var Immutable = require('immutable');
 
-var store;
+var cursor;
 
-module.exports = function(obj) {
+const store = function(obj) {
   if (obj)
-    store = Fynx.createCursorStore(Immutable.fromJS(obj));
+    cursor = Fynx.createCursorStore(Immutable.fromJS(obj));
   else
-    return store;
+    return cursor();
 }
+
+store.cursor = function() {
+  return cursor;
+}
+
+export default store;

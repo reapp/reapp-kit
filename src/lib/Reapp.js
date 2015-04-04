@@ -24,18 +24,18 @@ module.exports = function(opts, Component) {
       getChildContext: function() {
         return {
           theme: theme(),
-          store: store(),
+          store: store.cursor(),
           actions: actions
         };
       },
 
       componentWillMount() {
         this.forceUpdater = () => this.forceUpdate();
-        store() && store().listen(this.forceUpdater);
+        store.cursor() && store.cursor().listen(this.forceUpdater);
       },
 
       componentWillUnmount() {
-        store() && store().unlisten(this.forceUpdater);
+        store.cursor() && store.cursor().unlisten(this.forceUpdater);
       },
 
       render: function() {
