@@ -1,14 +1,17 @@
-import UI from 'reapp-ui';
-import 'reapp-object-assign';
-import 'reapp-ui/lib/desktopTouch';
+import { Promise } from 'bluebird';
+window.Promise = Promise;
 
 // fetch
 import 'isomorphic-fetch';
 
+import UI from 'reapp-ui';
+import 'reapp-object-assign';
+import 'reapp-ui/lib/desktopTouch';
+
 // data
 import Immutable from 'immutable';
 import store from './lib/store';
-import StoreComponent from './lib/StoreComponent';
+import Store from './lib/StoreComponent';
 import actions from './lib/actions';
 
 // theme
@@ -42,25 +45,28 @@ module.exports = Object.assign(
   Components,
   {
     // react
-    React: React,
+    React,
 
     // reapp component/page export
-    Component: Component,
-    Page: Page,
+    Component,
+    Page,
 
     // immutable
-    Immutable: Immutable,
+    Immutable,
+
+    // promise
+    Promise,
 
     // reapp
-    Reapp: Reapp,
+    Reapp,
 
     // data
-    actions: actions,
-    store: store,
-    Store: StoreComponent,
+    actions,
+    store,
+    Store,
 
     // theme
-    theme: theme,
+    theme,
     makeStyles: UI.makeStyles,
 
     // router
