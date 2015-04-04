@@ -12,7 +12,7 @@ import 'reapp-ui/lib/desktopTouch';
 import Immutable from 'immutable';
 import store from './lib/store';
 import Store from './lib/StoreComponent';
-import actions from './lib/actions';
+import action from './lib/action';
 
 // theme
 import theme from './lib/theme';
@@ -62,7 +62,7 @@ module.exports = Object.assign(
     Reapp,
 
     // data
-    actions,
+    action,
     store,
     Store,
 

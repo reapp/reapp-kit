@@ -3,7 +3,7 @@ var RoutedViewListMixin = require('reapp-routes/react-router/RoutedViewListMixin
 var Components = require('reapp-ui/all');
 var store = require('./store');
 var theme = require('./theme');
-var actions = require('./actions');
+var action = require('./action');
 var ContextTypes = require('./ContextTypes');
 
 module.exports = function(opts, Component) {
@@ -25,7 +25,7 @@ module.exports = function(opts, Component) {
         return {
           theme: theme(),
           store: store.cursor(),
-          actions: actions
+          action: action
         };
       },
 
