@@ -5,9 +5,9 @@ var actions = function(name, cb) {
     actions[name] = Fynx.createAsyncAction(name);
 
   if (typeof cb === 'function')
-    actions[name].listen(cb);
+    return actions[name].listen(cb);
   else if (actions[name])
-    actions[name](cb);
+    return actions[name](cb);
 }
 
 actions.unlisten = function(name, fn) {
