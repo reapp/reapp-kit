@@ -16,6 +16,7 @@ class Component extends Base {
 
     this.store = store.cursor();
     this.actions = actions;
+    this.router = () => this.context.router;
 
     if (shouldAutoBind) this.autoBind();
   }

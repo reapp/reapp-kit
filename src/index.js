@@ -21,6 +21,7 @@ import theme from './lib/theme';
 import Components from 'reapp-ui/all';
 
 // router
+import Router from 'react-router';
 import generator from 'reapp-routes/react-router/generator';
 import render from 'reapp-routes/react-router/render';
 
@@ -70,6 +71,7 @@ module.exports = Object.assign(
     makeStyles: UI.makeStyles,
 
     // router
+    Router,
     router: function(require, routes) {
       return render.async(generator.routes(require, routes))
     },
