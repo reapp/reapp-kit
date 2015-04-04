@@ -6,7 +6,6 @@ import 'isomorphic-fetch';
 
 import UI from 'reapp-ui';
 import 'reapp-object-assign';
-import 'reapp-ui/lib/desktopTouch';
 
 // data
 import Immutable from 'immutable';
