@@ -48,7 +48,7 @@ module.exports = function(opts, Component) {
 
         const themedChildren = Theme ? <Theme>{viewList}</Theme> : viewList;
         const props = opts.routed ? {
-          child: this.hasChildRoute() && this.createChildRouteHandler,
+          child: this.hasChildRoute() && this.createChildRouteHandler || noop,
           viewListProps: this.routedViewListProps()
         } : {};
 
@@ -57,3 +57,5 @@ module.exports = function(opts, Component) {
     }
   ))
 }
+
+function noop() { return null; }
