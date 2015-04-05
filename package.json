@@ -2,10 +2,10 @@
   "name": "reapp-kit",
   "version": "1.2.1",
   "description": "Unified platform for apps",
-  "main": "build",
+  "main": "dist",
   "scripts": {
-    "build": "babel src --out-dir build --stage=0",
-    "watch": "babel src --out-dir build --stage=0 --watch"
+    "build": "babel src --out-dir dist --stage=0",
+    "watch": "babel src --out-dir dist --stage=0 --watch"
   },
   "repository": {
     "type": "git",
