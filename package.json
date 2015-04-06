@@ -1,6 +1,6 @@
 {
   "name": "reapp-kit",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Unified platform for apps",
   "main": "dist",
   "scripts": {
