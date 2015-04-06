@@ -15,7 +15,8 @@ var action = function(name, cb) {
 }
 
 action.unlisten = function(name, fn) {
-  action[name].unlisten(fn);
+  if (action[name])
+    action[name].unlisten(fn);
 }
 
 export default action;

@@ -18,28 +18,34 @@ store.cursor = function(path, Component) {
 
     return class CursoredComponent extends React.Component {
       setCursors() {
+        let curPath = path;
         this.cursors = {};
 
         if (typeof path === 'function')
-          path = path.call(this, this.props);
+          curPath = path.call(this);
 
-        if (Array.isArray(path))
-          path.forEach(key => {
+        if (Array.isArray(curPath))
+          curPath.forEach(key => {
             this.cursors[key] = cursor().get(key);
           });
         else
-          Object.keys(path).forEach(key => {
-            this.cursors[key] = cursor().getIn([].concat(path[key]));
+          Object.keys(curPath).forEach(key => {
+            this.cursors[key] = cursor().getIn([].concat(curPath[key]));
           });
       }
 
       componentWillMount() {
         this.setCursors.call(this);
+        cursor.listen(this.cursorListener, this);
+      }
 
-        cursor.listen(() => {
-          this.setCursors();
-          this.forceUpdate();
-        });
+      componentWillUnmount() {
+        cursor.unlisten(this.cursorListener, this);
+      }
+
+      cursorListener() {
+        this.setCursors();
+        this.forceUpdate();
       }
 
       render() {
