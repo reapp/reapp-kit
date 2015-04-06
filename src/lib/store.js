@@ -20,6 +20,9 @@ store.cursor = function(path, Component) {
       setCursors() {
         this.cursors = {};
 
+        if (typeof path === 'function')
+          path = path.call(this, this.props);
+
         if (Array.isArray(path))
           path.forEach(key => {
             this.cursors[key] = cursor().get(key);
