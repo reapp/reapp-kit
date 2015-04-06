@@ -16,7 +16,7 @@ store.cursor = function(path, Component) {
     if (!Component)
       return cursor().getIn(path);
 
-    return class CursoredComponent {
+    return class CursoredComponent extends React.Component {
       setCursors() {
         this.cursors = {};
 
@@ -33,9 +33,9 @@ store.cursor = function(path, Component) {
       componentWillMount() {
         this.setCursors.call(this);
 
-        cursor.listen((newData, path) => {
-          debugger;
-          // this.forceRefresh();
+        cursor.listen(() => {
+          this.setCursors();
+          this.forceUpdate();
         });
       }
 

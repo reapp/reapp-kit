@@ -16,7 +16,7 @@ module.exports = function(t) {
 }
 
 // user may not want to configure a whole theme and just pass
-// in the raw theme, lets convert it for them
+// in the theme we give them wholesale, lets convert it
 function convertRawTheme(theme) {
   if (!Array.isArray(theme.constants)) {
     return {
