@@ -1,4 +1,5 @@
 import { Promise } from 'bluebird';
+Promise.longStackTraces();
 window.Promise = Promise;
 
 // fetch
