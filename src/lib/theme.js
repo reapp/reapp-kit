@@ -2,7 +2,7 @@ var UI = require('reapp-ui');
 
 var theme;
 
-module.exports = function(t) {
+export default function(t) {
   if (t) {
     t = convertRawTheme(t);
 
