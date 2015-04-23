@@ -72,8 +72,8 @@ module.exports = Object.assign(
 
     // router
     Router,
-    router: function(require, routes) {
-      return render.async(generator.routes(require, routes))
+    router: function(require, routes, opts, cb) {
+      return render.async(generator.routes(require, routes), opts, cb);
     },
     route: generator.route
   }
