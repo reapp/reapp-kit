@@ -6,6 +6,7 @@ window.Promise = Promise;
 import 'isomorphic-fetch';
 
 import UI from 'reapp-ui';
+import Helpers from 'reapp-ui/helpers';
 import 'reapp-object-assign';
 
 // data
@@ -66,9 +67,10 @@ module.exports = Object.assign(
     store,
     Store,
 
-    // theme
+    // UI
     theme,
     makeStyles: UI.makeStyles,
+    Helpers,
 
     // router
     Router,
