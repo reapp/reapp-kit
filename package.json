@@ -27,7 +27,7 @@
     "react-router": "^0.13.2",
     "reapp-object-assign": "^1.0.0",
     "reapp-routes": "^0.10.0",
-    "reapp-ui": "^0.12.54"
+    "reapp-ui": "0.12.55"
   },
   "peerDependencies": {
     "react": "0.13.x"
