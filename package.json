@@ -1,6 +1,6 @@
 {
   "name": "reapp-kit",
-  "version": "1.2.15",
+  "version": "1.2.16",
   "description": "Unified platform for apps",
   "main": "dist",
   "scripts": {
@@ -18,21 +18,18 @@
   },
   "homepage": "https://github.com/reapp/reapp-kit",
   "dependencies": {
-    "bluebird": "^2.9.24",
-    "fynx": "^1.6.0",
-    "immutable": "^3.7.1",
-    "isomorphic-fetch": "^2.0.0",
-    "omniscient": "^3.1.0",
-    "react": "^0.13.1",
-    "react-router": "^0.13.2",
+    "bluebird": "^3.1.2",
+    "fynx": "^1.7.1",
+    "immutable": "^3.7.6",
+    "isomorphic-fetch": "^2.2.1",
+    "omniscient": "^4.1.1",
+    "react": "0.14.x",
+    "react-router": "^0.13.5",
     "reapp-object-assign": "^1.0.0",
-    "reapp-routes": "^0.10.0",
-    "reapp-ui": "0.12.55"
-  },
-  "peerDependencies": {
-    "react": "0.13.x"
+    "reapp-routes": "aprihodko/reapp-routes#react-0.14",
+    "reapp-ui": "aprihodko/reapp-ui#react-0.14"
   },
   "devDependencies": {
-    "babel": "^5.0.7"
+    "babel": "^5.8.35"
   }
 }
