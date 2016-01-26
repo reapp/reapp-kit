@@ -8,7 +8,7 @@ even more time by making a few choices for you. Those are:
 - ultra simple actions that can be chained
 - fetch polyfill
 
-Becuase it brings together routing and data/actions, your app gains some amazing power.
+Because it brings together routing and data/actions, your app gains some amazing powers.
 First, you can focus on what matters and save time gluing things together. Second, we can
 optimize your app automatically and avoid common bugs.
 Third, you spend less time managing dependecies and figuring out how to architect your app.
