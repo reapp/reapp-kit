@@ -26,8 +26,8 @@
     "react": "0.14.x",
     "react-router": "^0.13.5",
     "reapp-object-assign": "^1.0.0",
-    "reapp-routes": "aprihodko/reapp-routes#react-0.14",
-    "reapp-ui": "aprihodko/reapp-ui#react-0.14"
+    "reapp-routes": "^0.10.13",
+    "reapp-ui": "0.12.66"
   },
   "devDependencies": {
     "babel": "^5.8.35"
