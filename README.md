@@ -1,6 +1,6 @@
 ## reapp-kit
 
-Reapp Kit unifies all your reapp pieces into one convienent package. It saves you
+Reapp Kit unifies all your reapp pieces into one convenient package. It saves you
 even more time by making a few choices for you. Those are:
 
 - react-router for top level routes
@@ -9,9 +9,9 @@ even more time by making a few choices for you. Those are:
 - fetch polyfill
 
 Because it brings together routing and data/actions, your app gains some amazing powers.
-First, you can focus on what matters and save time gluing things together. Second, we can
+First, you can focus on what matters and save time gluing things together. Second, you can
 optimize your app automatically and avoid common bugs.
-Third, you spend less time managing dependecies and figuring out how to architect your app.
+Third, you can spend less time managing dependencies and figuring out how to architect your app.
 
 Using reapp-kit is simple:
 
