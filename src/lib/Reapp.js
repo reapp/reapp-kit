@@ -46,10 +46,6 @@ module.exports = function(opts, Component) {
             {children}
           </Components.ViewList>
 
-          console.log('Reapp render Component and this');
-          console.log(Component);
-          console.log(this);
-
         const props = opts.routed ? {
           child: this.hasChildRoute() && this.createChildRouteHandler || noop,
           viewListProps: this.routedViewListProps()

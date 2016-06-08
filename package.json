@@ -23,7 +23,7 @@
     "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.1",
     "omniscient": "^4.1.1",
-    "react": "0.14.x",
+    "react": "^15.1.0",
     "reapp-object-assign": "^1.0.0",
     "reapp-ui": "^0.12.0"
   },
