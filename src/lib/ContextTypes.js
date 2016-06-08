@@ -5,5 +5,5 @@ module.exports = {
   animations: React.PropTypes.object,
   store: React.PropTypes.func,
   action: React.PropTypes.func,
-  router: React.PropTypes.func
+  router: React.PropTypes.object
 };

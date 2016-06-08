@@ -49,7 +49,7 @@ module.exports = function(opts, Component) {
         const props = opts.routed ? {
           child: this.hasChildRoute() && this.createChildRouteHandler || noop,
           viewListProps: this.routedViewListProps()
-        } : {};
+        } : this.props;
 
         return <Component {...props} />;
       }
